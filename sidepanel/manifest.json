@@ -1,0 +1,15 @@
+{
+    "manifest_version": 3,
+    "name": "Title Reader Extension",
+    "version": "1.0",
+    "permissions": [
+      "tabs", "scripting", "storage", "activeTab", "sidePanel"
+    ],
+    "action": {
+      "default_title": "Read Page Title"
+    },
+    "background": {
+      "service_worker": "background.js"
+    }
+  }
+  
