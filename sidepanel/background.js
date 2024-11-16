@@ -1,35 +1,4 @@
 
-//chrome.sidePanel
-//  .setPanelBehavior({ openPanelOnActionClick: true })
-//  .catch((error) => console.error(error));
-
-// First listener
-chrome.action.onClicked.addListener((tab) => {
-  console.log("First listener:", tab.url);
-});
-
-// Second listener
-chrome.action.onClicked.addListener((tab) => {
-  console.log("Second listener:", tab.title);
-});
-
-chrome.action.onClicked.addListener(async (tab) => {
-  // Attach debugger to the tab
-  await chrome.debugger.attach({tabId: tab.id}, '1.3');
-  
-  // Get DOM snapshot
-  const {result} = await chrome.debugger.sendCommand(
-      {tabId: tab.id},
-      'DOMSnapshot.captureSnapshot',
-      {computedStyles: []}
-  );
-  
-  // Store or process the snapshot
-  console.log(result);
-  
-  // Detach debugger when done
-  await chrome.debugger.detach({tabId: tab.id});
-});
 
   chrome.action.onClicked.addListener(async (tab) => {
     console.log("actionOnClicked", tab);
@@ -65,11 +34,6 @@ chrome.action.onClicked.addListener(async (tab) => {
   // Listen for tab updates to detect navigation changes
   chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     console.log("tabsOnUpdated", tabId, changeInfo, tab);
-    //if (changeInfo.status === 'loading') {
-    //  newurl = tab.url;
-    //  // Store the page title in local storage for use in the side panel
-    //  chrome.storage.local.set({ pageTitle: tab.title });
-    //}
     if (changeInfo.status === 'complete') {
       const currentTitle = tab.title;
       chrome.storage.local.set({ pageTitle: tab.title });
@@ -97,4 +61,23 @@ chrome.action.onClicked.addListener(async (tab) => {
   });
   }; //if
 })
+
+chrome.runtime.onSuspend.addListener(() => {
+  chrome.storage.local.clear();
+});
+
+// Optional: Clear old data on startup
+chrome.runtime.onStartup.addListener(() => {
+  // Clear data older than X days
+  chrome.storage.local.get(null, (items) => {
+    const now = Date.now();
+    const maxAge = 7 * 24 * 60 * 60 * 1000; // 7 days
+    
+    Object.entries(items).forEach(([key, value]) => {
+      if (value.timestamp && (now - value.timestamp) > maxAge) {
+        chrome.storage.local.remove(key);
+      }
+    });
+  });
+});
   

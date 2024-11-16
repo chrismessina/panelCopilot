@@ -3,7 +3,7 @@
     "name": "Title Reader Extension",
     "version": "1.0",
     "permissions": [
-      "tabs", "scripting", "storage", "activeTab", "sidePanel"
+      "tabs", "scripting", "storage", "activeTab", "sidePanel", "debugger"
     ],
     "action": {
       "default_title": "Read Page Title"

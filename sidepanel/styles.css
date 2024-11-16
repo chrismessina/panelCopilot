@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  
+  .container {
+    padding: 16px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .header h1 {
+    margin: 0;
+    font-size: 1.5em;
+  }
+  
+  .history-entry {
+    padding: 12px;
+    border: 1px solid #eee;
+    margin-bottom: 12px;
+    border-radius: 6px;
+  }
+  
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  
+  .entry-title {
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  
+  .entry-time {
+    font-size: 0.8em;
+    color: #666;
+  }
+  
+  .entry-url {
+    font-size: 0.9em;
+    color: #0066cc;
+    margin: 4px 0;
+    word-break: break-all;
+  }
+  
+  .entry-headings {
+    margin-top: 8px;
+  }
+  
+  .h1 {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 4px 0;
+  }
+  
+  .h2 {
+    font-size: 1em;
+    margin: 3px 0 3px 12px;
+  }
+  
+  .h3 {
+    font-size: 0.9em;
+    color: #666;
+    margin: 2px 0 2px 24px;
+  }
+  
+  #clear-history {
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+  }
+  
+  #clear-history:hover {
+    background: #f5f5f5;
+  }
