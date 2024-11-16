@@ -3,6 +3,34 @@
 //  .setPanelBehavior({ openPanelOnActionClick: true })
 //  .catch((error) => console.error(error));
 
+// First listener
+chrome.action.onClicked.addListener((tab) => {
+  console.log("First listener:", tab.url);
+});
+
+// Second listener
+chrome.action.onClicked.addListener((tab) => {
+  console.log("Second listener:", tab.title);
+});
+
+chrome.action.onClicked.addListener(async (tab) => {
+  // Attach debugger to the tab
+  await chrome.debugger.attach({tabId: tab.id}, '1.3');
+  
+  // Get DOM snapshot
+  const {result} = await chrome.debugger.sendCommand(
+      {tabId: tab.id},
+      'DOMSnapshot.captureSnapshot',
+      {computedStyles: []}
+  );
+  
+  // Store or process the snapshot
+  console.log(result);
+  
+  // Detach debugger when done
+  await chrome.debugger.detach({tabId: tab.id});
+});
+
   chrome.action.onClicked.addListener(async (tab) => {
     console.log("actionOnClicked", tab);
     if (tab) {
