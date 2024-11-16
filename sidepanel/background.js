@@ -11,7 +11,7 @@
         console.log("pr", pr);
         //console.log("open in tab.id", tab.id);
         // Open the side panel actually
-        res = await chrome.sidePanel.open({tabId:tab.id});
+        let res = await chrome.sidePanel.open({tabId:tab.id});
         //and fulfill the promise now
         res = await pr;
         //or open global using windowID, but it must be defined in the manifest
@@ -62,6 +62,64 @@
   }; //if
 })
 
+//IA local:
+import { env,pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers';
+
+env.backends.onnx.wasm.numThreads = 1;
+
+//env.wasm.numThreads=1;
+
+let textGenerationPipeline = null;
+
+chrome.runtime.onInstalled.addListener(async () => {
+    //const model = 'Xenova/distilgpt2';
+    //const model = '/onnx-community/Llama-3.2-1B-Instruct' //faltan ficheros
+    //const model = 'Xenova/gpt2';
+    //const model ='Xenova/Phi-3-mini-4k-instruct';  //unsoported
+    //const model = 'Xenova/bloom-560m'; 
+    //const model = 'Xenova/llama2.c-stories15M'; 
+    //const model = 'onnx-community/Qwen2.5-0.5B-Instruct' //faltan ficheros
+    //const model = 'Xenova/Qwen1.5-0.5B-Chat';
+    const model = 'Xenova/gpt-neo-125M';
+
+
+    console.log('Starting model initialization...');
+    textGenerationPipeline = await pipeline('text-generation', model, {
+      progress_callback: (status) => {
+        console.log('Model loading status:', status);
+      }
+    });
+    console.log('Model loaded successfully', textGenerationPipeline);
+    //now test the model, output result to console:
+    const output = await textGenerationPipeline('The capital of France is');
+    console.log('Model test output:', output[0].generated_text);
+    console.log(output);
+});
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  console.log("Received message:", message);
+  if (message.action === 'generateHelp' && textGenerationPipeline) {
+    console.log("Calling pipeline with entry:", message.entry);
+    textGenerationPipeline(message.entry, { max_length: 100, num_return_sequences: 3, do_sample: true, top_k: 5 })
+      .then(output => {
+        console.log("Pipeline output:", output);
+        sendResponse({ result: output[0].generated_text });
+      })
+      .catch(error => {
+        console.error("Error during help generation:", error);
+        sendResponse({ error: 'Help generation failed' });
+      });
+    return true; // Indicates that the response will be sent asynchronously
+  } else {
+    console.warn("Invalid action or uninitialized pipeline");
+    sendResponse({ error: 'Invalid action or uninitialized pipeline' });
+    return false;
+  }
+});
+
+
+
+// Clear all data when the extension is uninstalled or disabled
 chrome.runtime.onSuspend.addListener(() => {
   chrome.storage.local.clear();
 });

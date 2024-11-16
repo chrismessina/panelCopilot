@@ -1,3 +1,7 @@
+import { pipeline, env } from './lib/transformers.js';
+
+env.localModelPath = chrome.runtime.getURL('models/');
+env.allowRemoteModels = true;  // Allow downloading from HuggingFace
 
 class BrowsingHistory {
     constructor(maxSize = 100) {
@@ -44,9 +48,35 @@ class BrowsingHistory {
     }
   }
   
+// sidepanel.js
+class AIHelper {
+    constructor() {
+      this.isLoading = false;
+    }
+  
+    async generateHelp(entry) {
+      return new Promise((resolve, reject) => {
+        prompt="You are reading "+entry.title+". I think this is interesting because ";
+        chrome.runtime.sendMessage({ action: 'generateHelp', entry: prompt }, (response) => {
+            console.log("response",response);
+          if (response.error) {
+            console.error('Help generation failed:', response.error);
+            reject(response.error);
+          } else {
+            console.log("actual response from AI:",response.result);
+            resolve(response.result);
+          }
+        });
+      });
+    }
+  }
+  
+  //export default AIHelper;
+
   class SidepanelManager {
     constructor() {
       this.history = new BrowsingHistory();
+      this.aiHelper = new AIHelper();
       this.currentTabId = null;
     }
   
@@ -116,6 +146,16 @@ class BrowsingHistory {
           </div>
         `;
         container.appendChild(entryElement);
+
+        // add AI history directly to the entry:
+        const aiElement = document.createElement('div');
+        aiElement.className = 'entry-ai';
+        entryElement.appendChild(aiElement);
+        this.aiHelper.generateHelp(entry).then(help => {
+          console.log("got help",help);
+          aiElement.textContent = help;
+        });
+
       });
     }
   }
