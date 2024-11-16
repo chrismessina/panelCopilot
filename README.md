@@ -5,7 +5,11 @@ with the development cycle of the main production line.
 
 They can also be used as generic copilots or web-companions.
 
-Currently we only present here the **Sidepanel** module
+Currently we only present here the **Sidepanel** module. 
+
+This branch is a particular example suitable for console.log tracing, for educational purposes.
+It calls a not very large LLM, namely the javascript transformers.js gpt2,
+so it is local but not very powerful, and I do not expect to develop along this line.
 
 ## Features of sidepanel
 
@@ -15,15 +19,6 @@ Currently we only present here the **Sidepanel** module
 - **Real-time Updates**: Automatically updates when navigating to new pages or changing tabs.
 - **Clear History**: Option to clear the browsing history from the side panel.
 - **Minimal Permissions**: Uses `activeTab` permission to enhance user privacy.
-
-### Files and Structure
-
-- **`manifest.json`**: Defines extension permissions and includes side panel configuration.
-- **`background.js`**: Handles extension activation and opens the side panel.
-- **`sidepanel.html`**: The HTML template for the side panel UI.
-- **`sidepanel.js`**: Contains the logic for managing history and injecting scripts.
-- **`styles.css`**: CSS styles for the side panel UI.
-- **`page-analyzer.js`**: Used for content script injection but programmatically
 
 ### How It Works
 
@@ -46,6 +41,9 @@ Currently we only present here the **Sidepanel** module
    - The side panel UI displays the history entries with expandable headings.
    - Provides a "Clear History" button to reset the stored history.
 
+6. **AI Opinions**:
+   - A call is done to transformers.js gpt2 to generate an opinion on the page
+ 
 ## Installation and Setup
 
 1. **Clone the Repository**
