@@ -1,5 +1,5 @@
 # Sidepanel Helpers
-This repo contains a series of demos to use Chrome extension as a gatewayt
+This repo contains a series of demos to use Chrome extension as a gateway
 to build AI helpers over live websites, to test features without interfering
 with the development cycle of the main production line.
 
@@ -24,6 +24,7 @@ Currently we only present here the **Sidepanel** module
 - **`sidepanel.js`**: Contains the logic for managing history and injecting scripts.
 - **`styles.css`**: CSS styles for the side panel UI.
 - **`page-analyzer.js`**: Used for content script injection but programmatically
+- **`options.html`**: The HTML template for the extension options UI.
 
 ### How It Works
 
@@ -59,3 +60,19 @@ Currently we only present here the **Sidepanel** module
 3. Enable Developer mode by toggling the switch in the top right corner.
 
 4. Click on Load unpacked and select the sidepanel directory.
+
+### Configuration
+
+To enable AI features, you must configure the extension options:
+
+1. **Open the Extension Options**: Right-click the extension icon and select "Options".
+2. **Fill in the API Keys and Endpoints**:
+   - **OpenAI API Key**: Your OpenAI API key.
+   - **Ollama API Key**: Your Ollama API key.
+   - **OpenAI Endpoint**: The endpoint for OpenAI API requests.
+   - **Ollama Endpoint**: The endpoint for Ollama API requests.
+   - **Default Client**: Select the default client (OpenAI or Ollama) to use for AI requests.
+
+3. **Save the Options**: Click the "Save" button to store the configuration.
+
+Once the options are configured, the AI features will be enabled and can be used within the side panel.

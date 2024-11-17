@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Title Reader Extension",
+    "name": "Browsing Companion",
     "version": "1.0",
     "permissions": [
       "tabs", "scripting", "storage", "activeTab", "sidePanel", "debugger",
@@ -16,6 +16,7 @@
     "content_security_policy": {
         "extension_pages": "script-src 'self' 'wasm-unsafe-eval'"
       },
+    "options_page": "options.html",
     "action": {
       "default_title": "Read Page Title"
     },

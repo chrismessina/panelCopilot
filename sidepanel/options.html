@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Extension Options</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    label { display: block; margin-top: 10px; }
+    input, select { width: 100%; padding: 5px; }
+    button { margin-top: 10px; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Extension Options</h1>
+  <label for="openaiApiKey">OpenAI API Key:</label>
+  <input type="text" id="openaiApiKey">
+  <label for="ollamaApiKey">Ollama API Key:</label>
+  <input type="text" id="ollamaApiKey">
+  <label for="openaiEndpoint">OpenAI Endpoint:</label>
+  <input type="text" id="openaiEndpoint">
+  <label for="ollamaEndpoint">Ollama Endpoint:</label>
+  <input type="text" id="ollamaEndpoint">
+  <label for="defaultClient">Default Client:</label>
+  <select id="defaultClient">
+    <option value="openai">OpenAI</option>
+    <option value="ollama">Ollama</option>
+  </select>
+  <button id="save">Save</button>
+  <script src="options.js"></script>
+</body>
+</html>
