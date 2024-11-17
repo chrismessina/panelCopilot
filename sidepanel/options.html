@@ -24,6 +24,11 @@
     <option value="openai">OpenAI</option>
     <option value="ollama">Ollama</option>
   </select>
+  <p>If you use a private endpoint, consider a tunnel ssh:
+    <code>ssh -L 11434:localhost:11434 -o ServerAliveInterval=60 ruser@server</code>
+    instead of exposing your server to the internet.
+  </p>
+  <p>Also note that OLLAMA_ORIGINS must allow  <code>chrome-extension://*</code></p>
   <button id="save">Save</button>
   <script src="options.js"></script>
 </body>

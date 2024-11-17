@@ -52,7 +52,7 @@ class AIHelper {
   
     async generateHelp(entry) {
       return new Promise((resolve, reject) => {
-        prompt="You are reading "+entry.title+". I think this is interesting because ";
+        prompt="I am reading "+entry.title+ "website. Guess or explain what the website is about.";
         chrome.runtime.sendMessage({ action: 'generateHelp', entry: prompt }, (response) => {
             console.log("response",response);
           if (response.error) {

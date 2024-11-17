@@ -3,19 +3,11 @@
     "name": "Browsing Companion",
     "version": "1.0",
     "permissions": [
-      "tabs", "scripting", "storage", "activeTab", "sidePanel", "debugger",
+      "tabs", "scripting", "storage", "activeTab", "sidePanel", 
       "unlimitedStorage"
     ],
-    "host_permissions": [
-        "https://huggingface.co/*"
-      ],
-      "web_accessible_resources": [{
-        "resources": ["models/*"],
-        "matches": ["<all_urls>"]
-      }],
-    "content_security_policy": {
-        "extension_pages": "script-src 'self' 'wasm-unsafe-eval'"
-      },
+    "host_permissions": [ "http://localhost:11434/*" ],
+    "web_accessible_resources": [],
     "options_page": "options.html",
     "action": {
       "default_title": "Read Page Title"

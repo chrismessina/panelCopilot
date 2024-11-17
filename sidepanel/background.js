@@ -88,20 +88,29 @@ async function callOpenAI(prompt) {
 }
 
 // Function to call Ollama API
-async function callOllama(prompt) {
+async function callOllama(prompt,config) {
   const response = await fetch(config.ollamaEndpoint, {
     method: 'POST',
+    referrerPolicy: 'no-referrer',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${config.ollamaApiKey}`
+      'Origin': null,
+      //'Authorization': `Bearer ${config.ollamaApiKey}`
     },
     body: JSON.stringify({
+      model: "qwen2.5:14b-instruct-q8_0",
       prompt: prompt,
-      max_tokens: 100
+      stream: false,
+      options: {
+        num_predict: 128 // (Default: 128, -1 = infinite generation, -2 = fill context)
+      }
     })
   });
+  console.log("response",response);
+  console.log("status",response.status);
   const data = await response.json();
-  return data.choices[0].text;
+  let text = data.response;
+  return text || "No response from Ollama";
 }
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -120,7 +129,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             sendResponse({ error: 'Help generation failed' });
           });
       } else if (client === 'ollama') {
-        callOllama(prompt)
+        callOllama(prompt,config)
           .then(result => {
             sendResponse({ result: result });
           })
@@ -129,14 +138,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             sendResponse({ error: 'Help generation failed' });
           });
       } else {
-        console.warn("Invalid client specified");
+        console.warn("Invalid client specified", client);
         sendResponse({ error: 'Invalid client specified' });
       }
     });
     return true; // Indicates that the response will be sent asynchronously
   } else {
-    console.warn("Invalid action");
-    sendResponse({ error: 'Invalid action' });
+    console.warn("This action is not for us:", message);
+    //sendResponse({ error: 'Invalid action' });
     return false;
   }
 });

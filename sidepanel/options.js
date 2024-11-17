@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('ollamaApiKey').value = items.ollamaApiKey || '';
     document.getElementById('openaiEndpoint').value = items.openaiEndpoint || '';
     document.getElementById('ollamaEndpoint').value = items.ollamaEndpoint || '';
-    document.getElementById('defaultClient').value = items.defaultClient || 'openai';
+    document.getElementById('openaiEndpoint').value = items.openaiEndpoint || 'https://api.openai.com/v1/completions';
+    document.getElementById('ollamaEndpoint').value = items.ollamaEndpoint || 'http://localhost:11434/api/generate';
+    document.getElementById('defaultClient').value = items.defaultClient || 'ollama';
   });
 });
