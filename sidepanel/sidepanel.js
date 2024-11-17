@@ -1,7 +1,3 @@
-import { pipeline, env } from './lib/transformers.js';
-
-env.localModelPath = chrome.runtime.getURL('models/');
-env.allowRemoteModels = true;  // Allow downloading from HuggingFace
 
 class BrowsingHistory {
     constructor(maxSize = 100) {
