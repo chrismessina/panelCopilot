@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "DOM Explorer",
+  "version": "1.0",
+  "description": "Displays the DOM tree in a side panel.",
+  "permissions": ["sidePanel", "scripting", "contextMenus", "activeTab", "tabs"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_title": "Open Side Panel"
+  },
+  "sidebar_action": {
+    "default_title": "DOM Explorer",
+    "default_panel": "sidebar.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+   "default_path": "sidebar.html"
+ }
+}

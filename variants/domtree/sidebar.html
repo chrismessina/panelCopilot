@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Explorer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 10px;
+    }
+    button {
+      margin: 5px 0;
+      width: 100%;
+    }
+    #screenshot-container img {
+      max-width: 100%;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>DOM Explorer</h2>
+  <button id="serialize-dom">Copy Current DOM</button>
+  <button id="capture-screenshot">Screenshot Current Tab</button>
+  <button id="copy-yaml">Copy YAML to Clipboard</button>
+  <button id="copy-screenshot">Copy Screenshot to Clipboard</button>
+  <div id="screenshot-container"></div>
+  <script src="sidebar.js"></script>
+</body>
+</html>

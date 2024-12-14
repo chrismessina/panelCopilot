@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Page Manual Helper (Local AI)",
+  "version": "1.0",
+  "description": "Generate a user manual for any webpage using a local AI model.",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["style.css"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["model/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
