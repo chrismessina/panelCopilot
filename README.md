@@ -5,7 +5,16 @@ with the development cycle of the main production line.
 
 They can also be used as generic copilots or web-companions.
 
-Currently we only present here the **Sidepanel** module
+Currently we only present here the **Sidepanel** module.
+
+![Primitive example](./image.jpeg)
+
+The project is in the backburner because we guess our clients, vertically, will
+prefer an [iframe based solution](https://github.com/arivero/webIA), at the cost of forcing CORS compatibility of course.
+On the other hand, depending of the traction from Deepmind's Project Mariner,
+it could be worthwhile to restart from here. Not sure. At the moment, I will
+just track [other github projects that refer to Mariner](./awesome.md). Feel
+free to add yours.
 
 ## Features of sidepanel
 
