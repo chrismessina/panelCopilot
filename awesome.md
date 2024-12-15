@@ -3,10 +3,19 @@
 A curated list of GitHub projects related to Google Deepmind's [Project Mariner](https://deepmind.google/technologies/project-mariner/).
 Basically a [search on github](https://github.com/search?q=%22Project+Mariner%22&type=wikis).
 
-## Projects
+## Similar Projects
 
 - [Browsercompany's Diabrowser](https://x.com/browsercompany) is an expected similar project, not open source, not an extension.
 - [Sawyer Hood](https://github.com/SawyerHood)'s [Dobrowser](https://www.dobrowser.io/) is an extension. Not open source.
+- [Simular](https://www.simular.ai/). A full browser. It seems they plan also a Desktop.
+
+### Desktop based
+
+  - Antropic's computer use.
+
+### General agentic projects
+
+  - https://github.com/Significant-Gravitas/AutoGPT
 
 ## Mentions
 
