@@ -5,7 +5,8 @@ Basically a [search on github](https://github.com/search?q=%22Project+Mariner%22
 
 ## Projects
 
-- [Browsercompany's Diabrowser](https://x.com/browsercompany) is an expected similar project, not open source.
+- [Browsercompany's Diabrowser](https://x.com/browsercompany) is an expected similar project, not open source, not an extension.
+- [Sawyer Hood](https://github.com/SawyerHood)'s [Dobrowser](https://www.dobrowser.io/) is an extension. Not open source.
 
 ## Mentions
 
